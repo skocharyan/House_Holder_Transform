@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mask SelfModifiable="on">
+  <Type>CustomLcmvBeamformer</Type>
+  <SourceCheckSum>05293265E039B3501A426D9E0B220A96</SourceCheckSum>
+  <Display IconOpaque="transparent" RunInitForIconRedraw="off">disp([&apos;Time Delay LCMV&apos; char(10) &apos;Beamformer&apos;]);
+port_label(&apos;input&apos;,1,&apos;X&apos;);
+port_label(&apos;input&apos;,2,&apos;Ang&apos;);
+port_label(&apos;output&apos;,1,&apos;Y&apos;);
+</Display>
+  <Description>Perform linear constraint minimum variance (LCMV) beamforming in the time domain. The beamformer first steers the beam towards the given direction and then apply the constraints through a bank of FIR filters.</Description>
+  <Initialization>matlab.system.MLSysBlockIconAndPortLabelsInfo.updateMLSysBlockIconAndPortLabels(gcbh)</Initialization>
+  <MaskParameter Name="PropagationSpeed" Type="edit" Tunable="off">
+    <Prompt>Signal propagation speed (m/s):</Prompt>
+    <Value>physconst( &apos;LightSpeed&apos; )</Value>
+  </MaskParameter>
+  <MaskParameter Name="SampleRateFromInputCheckbox" Type="checkbox" Evaluate="off" Tunable="off">
+    <Prompt>Inherit sample rate </Prompt>
+    <Value>on</Value>
+  </MaskParameter>
+  <MaskParameter Name="SampleRate" Type="edit" Tunable="off" Visible="off">
+    <Prompt>Sample rate  (Hzzzzz):</Prompt>
+    <Value>1e6</Value>
+  </MaskParameter>
+  <MaskParameter Name="FilterLength" Type="edit" Tunable="off">
+    <Prompt>FIR filter length:</Prompt>
+    <Value>1</Value>
+  </MaskParameter>
+  <MaskParameter Name="Constraint" Type="edit" Tunable="off">
+    <Prompt>Constraint matrix:</Prompt>
+    <Value>[ 1; 1;1;1 ]</Value>
+  </MaskParameter>
+  <MaskParameter Name="DesiredResponse" Type="edit" Tunable="off">
+    <Prompt>Desired response vector:</Prompt>
+    <Value>1</Value>
+  </MaskParameter>
+  <MaskParameter Name="DiagonalLoadingFactor" Type="edit">
+    <Prompt>Diagonal loading factor:</Prompt>
+    <Value>0</Value>
+  </MaskParameter>
+  <MaskParameter Name="TrainingInputPort" Type="checkbox" Evaluate="off" Tunable="off">
+    <Prompt>Enable training data input</Prompt>
+    <Value>off</Value>
+  </MaskParameter>
+  <MaskParameter Name="DirectionSource" Type="popup" Evaluate="off" Tunable="off">
+    <Prompt>Source of beamforming direction:</Prompt>
+    <Value>Input port</Value>
+    <TypeOptions>
+      <Option>Property</Option>
+      <Option>Input port</Option>
+    </TypeOptions>
+  </MaskParameter>
+  <MaskParameter Name="Direction" Type="edit" Tunable="off" Visible="off">
+    <Prompt>Beamforming direction (deg):</Prompt>
+    <Value>[ 0; 0 ]</Value>
+  </MaskParameter>
+  <MaskParameter Name="WeightsOutputPort" Type="checkbox" Evaluate="off" Tunable="off">
+    <Prompt>Enable weights output</Prompt>
+    <Value>off</Value>
+  </MaskParameter>
+  <MaskParameter Name="SimulateUsing" Type="popup" Evaluate="off" Tunable="off">
+    <Prompt>SystemBlock:MATLABSystem:SimulateUsing</Prompt>
+    <Value>Code generation</Value>
+    <TypeOptions>
+      <Option>SystemBlock:MATLABSystem:SimulateUsingCodeGeneration</Option>
+      <Option>SystemBlock:MATLABSystem:SimulateUsingInterpretedExecution</Option>
+    </TypeOptions>
+  </MaskParameter>
+  <MaskParameter Name="SensorArray" Type="sysobject" Tunable="off">
+    <Prompt>Sensor array:</Prompt>
+    <Value>phased.URA([2,2] , [0.06 , 0.06] , &quot;Lattice&quot;,&quot;Rectangular&quot; )</Value>
+  </MaskParameter>
+  <DialogControl Type="Group" Name="DescGroupVar">
+    <Prompt>Time delay LCMV beamformer</Prompt>
+    <DialogControl Type="Text" Name="DescTextVar">
+      <Prompt>%&lt;MaskDescription&gt;</Prompt>
+    </DialogControl>
+    <DialogControl Type="Hyperlink" Name="SourceCodeLink">
+      <Prompt>Source code</Prompt>
+      <Callback>edit(&apos;CustomLcmvBeamformer&apos;);</Callback>
+    </DialogControl>
+  </DialogControl>
+  <DialogControl Type="TabContainer" Name="TabsContainer">
+    <DialogControl Type="Tab" Name="SectionGroup1">
+      <Prompt>SystemBlock:MATLABSystem:SystemBlockDialogAutoSectionGroupTitle</Prompt>
+      <ControlOptions AlignPrompts="on"/>
+      <DialogControl Type="Edit" Name="PropagationSpeed">
+        <Prompt>Signal propagation speed (m/s):</Prompt>
+        <ControlOptions PromptLocation="left"/>
+      </DialogControl>
+      <DialogControl Type="CheckBox" Name="SampleRateFromInputCheckbox">
+        <Prompt>Inherit sample rate </Prompt>
+      </DialogControl>
+      <DialogControl Type="Edit" Name="SampleRate">
+        <Prompt>Sample rate  (Hzzzzz):</Prompt>
+        <ControlOptions PromptLocation="left"/>
+      </DialogControl>
+      <DialogControl Type="Edit" Name="FilterLength">
+        <Prompt>FIR filter length:</Prompt>
+        <ControlOptions PromptLocation="left"/>
+      </DialogControl>
+      <DialogControl Type="Edit" Name="Constraint">
+        <Prompt>Constraint matrix:</Prompt>
+        <ControlOptions PromptLocation="left"/>
+      </DialogControl>
+      <DialogControl Type="Edit" Name="DesiredResponse">
+        <Prompt>Desired response vector:</Prompt>
+        <ControlOptions PromptLocation="left"/>
+      </DialogControl>
+      <DialogControl Type="Edit" Name="DiagonalLoadingFactor">
+        <Prompt>Diagonal loading factor:</Prompt>
+        <ControlOptions PromptLocation="left"/>
+      </DialogControl>
+      <DialogControl Type="CheckBox" Name="TrainingInputPort">
+        <Prompt>Enable training data input</Prompt>
+      </DialogControl>
+      <DialogControl Type="Popup" Name="DirectionSource">
+        <Prompt>Source of beamforming direction:</Prompt>
+        <ControlOptions PromptLocation="left"/>
+      </DialogControl>
+      <DialogControl Type="Edit" Name="Direction">
+        <Prompt>Beamforming direction (deg):</Prompt>
+        <ControlOptions PromptLocation="left"/>
+      </DialogControl>
+      <DialogControl Type="CheckBox" Name="WeightsOutputPort">
+        <Prompt>Enable weights output</Prompt>
+      </DialogControl>
+      <DialogControl Type="Panel" Name="SectionGroup1_Section1">
+        <ControlOptions AlignPrompts="on"/>
+        <DialogControl Type="Popup" Name="SimulateUsing">
+          <Prompt>Simulate using:</Prompt>
+          <Tooltip>SystemBlock:MATLABSystem:SimulateUsingDescription</Tooltip>
+          <ControlOptions PromptLocation="left"/>
+        </DialogControl>
+      </DialogControl>
+    </DialogControl>
+    <DialogControl Type="Tab" Name="SectionGroup2">
+      <Prompt>Sensor Array</Prompt>
+      <ControlOptions AlignPrompts="on"/>
+      <DialogControl Type="SysObject" Name="SensorArray">
+        <Prompt>Sensor array:</Prompt>
+      </DialogControl>
+    </DialogControl>
+  </DialogControl>
+</Mask>
